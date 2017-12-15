@@ -1,0 +1,20 @@
+body {
+    background-color: #F1E8BA;
+    margin: 0
+}
+
+
+.penrose{
+    width: 100%;
+    text-align: center;
+
+}
+
+footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: .5em;
+  margin: 5px;
+  color: #87B7B1
+}
