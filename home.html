@@ -123,7 +123,7 @@
                                 Position: IT Support Specialist
                             </p>
                             <p class="p-2 mb-3 bg-dark text-white">
-                                 <a href="https://goodnessme.ca/">Goodness Me!</a>
+                                 <a href="https://goodnessme.ca/" target="_blank">Goodness Me!</a>
                             </p>
                         </div>
                         <div class="card-footer">
@@ -139,7 +139,7 @@
                                 Position: Systems Administrator
                             </p>
                             <p class="p-2 mb-3 bg-dark text-white">
-                                <a href="http://www.rostiegroup.com/">Rostie Group</a>
+                                <a href="http://www.rostiegroup.com/" target="_blank">Rostie Group</a>
                             </p>
                         </div>
                         <div class="card-footer">
@@ -237,7 +237,7 @@
                             <span class="input-group-text bg-danger text-white" id="inputGroup-sizing-default">
                                 <i class="fa fa-user"></i>
                             </span>
-                            <input type="text" class="form-control bg-dark text-white" placeholder="Name">
+                            <input type="text" class="form-control bg-dark text-white" id="inputName" placeholder="Name">
                         </div>
                     </div>
                     <div class="form-group">
@@ -245,7 +245,7 @@
                             <span class="input-group-text bg-danger text-white" id="inputGroup-sizing-default">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                            <input type="email" class="form-control bg-dark text-white" placeholder="Email">
+                            <input type="email" class="form-control bg-dark text-white" id="inputEmail" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group">
@@ -253,9 +253,10 @@
                             <span class="input-group-text bg-danger text-white" id="inputGroup-sizing-default">
                                 <i class="fa fa-pencil"></i>
                             </span>
-                            <textarea rows="5" class="form-control bg-dark text-white" placeholder="Message"></textarea>
+                            <textarea rows="5" class="form-control bg-dark text-white" id="inputMessage" placeholder="Message"></textarea>
                         </div>
                     </div>
+                    <input type="text" name="_gotcha" style="display:none" />
                     <input type="submit" value="Submit" class="btn btn-danger btn-block btn-lg">
                 </form>
             </div>
@@ -273,7 +274,7 @@
         </div>
 
         <script src="https://use.fontawesome.com/8f999d22b2.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
@@ -291,7 +292,25 @@
                 $(this).ekkoLightbox();
             });
 
-            $
+            $('#contact-form').submit(function(e) {
+                var name = document.getElementById('inputName');
+                var email = document.getElementById('inputEmail');
+                var message = document.getElementById('inputMessage');
+
+                if (!name.value || !email.value || !message.value) {
+                    alertify.error('Please check your input entries. Make sure to write something in every field.')
+                } else {
+                    $.ajax({
+                        url: "https://formspree.io/albert.burc@gmail.com",
+                        method: "POST",
+                        data: $(this).serialize(),
+                        dataType: "json"
+                    });
+                    e.preventDefault()
+                    $(this).get(0).reset()
+                    alertify.success('Message Sent!')
+                }
+            })
         </script>
 </body>
 
