@@ -12,44 +12,7 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/themes/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/index.css">
-    <!--
-    <style>
-                .bg-black{
-            background: #000;
-            color: #fff;
-        }
 
-        #main-header img{
-                width: 100%;
-                height: 100%;
-                }
-
-
-
-        #main-header .port-item{
-                width: 30%;
-
-            }
-
-        #main-header .port-item .fa{
-            font-size: 2em;
-        }
-
-        #main-header .port-item:hover{
-                opacity: 0.8;
-                cursor: pointer;
-            }
-
-
-
-
-        @media(min-width:1199px){
-            .port-item{
-                padding: 3em !important;
-            }
-        }
-    </style>
-  -->
 </head>
 
 <body>
@@ -285,7 +248,7 @@
                             <span class="input-group-text bg-danger text-white" id="inputGroup-sizing-default">
                                 <i class="fa fa-user"></i>
                             </span>
-                            <input type="text" class="form-control bg-dark text-white" id="inputName" placeholder="Name" name="name">
+                            <input type="text" class="form-control bg-dark text-white" id="name" placeholder="Name" name="name">
                         </div>
                     </div>
                     <div class="form-group">
@@ -293,7 +256,7 @@
                             <span class="input-group-text bg-danger text-white" id="inputGroup-sizing-default">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                            <input type="email" class="form-control bg-dark text-white" id="inputEmail" placeholder="Email" name="email">
+                            <input type="email" class="form-control bg-dark text-white" id="email" placeholder="Email" name="email">
                         </div>
                     </div>
                     <div class="form-group">
@@ -301,10 +264,10 @@
                             <span class="input-group-text bg-danger text-white" id="inputGroup-sizing-default">
                                 <i class="fa fa-pencil"></i>
                             </span>
-                            <textarea rows="5" class="form-control bg-dark text-white" id="inputMessage" placeholder="Message" name="message"></textarea>
+                            <textarea rows="5" class="form-control bg-dark text-white" id="comment" placeholder="Message" name="comment"></textarea>
                         </div>
                     </div>
-                    <input type="text" name="_gotcha" style="display:none" />
+                    <input name="_formsubmit_id" type="text" style="display:none">
                     <input type="submit" value="Submit" class="btn btn-danger btn-block btn-lg">
                 </form>
             </div>
@@ -345,9 +308,9 @@
 
            $(document).ready(function () {
                 $('#contact-form').submit(function (e) {
-                    var name = document.getElementById('inputName');
-                    var email = document.getElementById('inputEmail');
-                    var message = document.getElementById('inputMessage');
+                    var name = document.getElementById('name');
+                    var email = document.getElementById('email');
+                    var message = document.getElementById('comment');
 
                     if (!name.value || !email.value || !message.value) {
                         alertify.error("Please check your entries. Make sure you enter your name, email and message.");
@@ -355,7 +318,7 @@
                     } else {
                         $.ajax({
                             method: 'POST',
-                            url: '//formspree.io/albert.burc@gmail.com',
+                            url: 'https://formsubmit.io/send/10ba751b-454e-4d74-b099-00c4748ca216',
                             data: $('#contact-form').serialize(),
                             datatype: 'json'
                         });
